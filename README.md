@@ -1,5 +1,5 @@
 #自定义Android数字键盘Demo
----
+
 ##仿造android端闲鱼发布商品时候选择价格 弹出的数字键盘。
 
 
@@ -16,7 +16,6 @@
 <p align="center">
 <img src="screen/screen_gif.gif" width="320px"/>
 </p>
----
 
 使用的android系统的api，keyboardview和keyboard，
 
