@@ -12,22 +12,32 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * 自定义键盘
  * Created by xuejinwei on 16/3/5.
  */
 public class KeyboardUtil {
-    private Context  mContext;
     private Activity mActivity;
+    private boolean  mIfRandom;
 
     private KeyboardView mKeyboardView;
     private Keyboard     mKeyboardNumber;//数字键盘
     private EditText     mEditText;
 
-    public KeyboardUtil(Activity activity, Context context) {
+    public KeyboardUtil(Activity activity) {
+        this(activity, false);
+    }
+
+    public KeyboardUtil(Activity activity, boolean ifRandom) {
         this.mActivity = activity;
-        this.mContext = context;
+        this.mIfRandom = ifRandom;
+        mKeyboardNumber = new Keyboard(mActivity, R.xml.keyboardnumber);
+        mKeyboardView = (KeyboardView) mActivity.findViewById(R.id.keyboard_view);
     }
 
     /**
@@ -37,14 +47,22 @@ public class KeyboardUtil {
      */
     public void attachTo(EditText editText) {
         this.mEditText = editText;
-        hideSystemSofeKeyboard(mContext, mEditText);
+        hideSystemSofeKeyboard(mActivity.getApplicationContext(), mEditText);
         showSoftKeyboard();
     }
 
     public void showSoftKeyboard() {
-        mKeyboardNumber = new Keyboard(mActivity, R.xml.keyboardnumber);
-        mKeyboardView = (KeyboardView) mActivity.findViewById(R.id.keyboard_view);
-        mKeyboardView.setKeyboard(mKeyboardNumber);
+        if (mKeyboardNumber == null) {
+            mKeyboardNumber = new Keyboard(mActivity, R.xml.keyboardnumber);
+        }
+        if (mKeyboardView == null) {
+            mKeyboardView = (KeyboardView) mActivity.findViewById(R.id.keyboard_view);
+        }
+        if (mIfRandom) {
+            randomKeyboardNumber();
+        } else {
+            mKeyboardView.setKeyboard(mKeyboardNumber);
+        }
         mKeyboardView.setEnabled(true);
         mKeyboardView.setPreviewEnabled(false);
         mKeyboardView.setVisibility(View.VISIBLE);
@@ -74,10 +92,12 @@ public class KeyboardUtil {
                     }
                 }
             } else if (primaryCode == Keyboard.KEYCODE_CANCEL) {// 隐藏键盘
+                hideKeyboard();
                 if (mOnCancelClick != null) {
                     mOnCancelClick.onCancellClick();
                 }
             } else if (primaryCode == Keyboard.KEYCODE_DONE) {// 隐藏键盘
+                hideKeyboard();
                 if (mOnOkClick != null) {
                     mOnOkClick.onOkClick();
                 }
@@ -160,5 +180,62 @@ public class KeyboardUtil {
 
     public void setOnCancelClick(onCancelClick onCancelClick) {
         mOnCancelClick = onCancelClick;
+    }
+
+
+    private boolean isNumber(String str) {
+        String wordstr = "0123456789";
+        return wordstr.contains(str);
+    }
+
+    private void randomKeyboardNumber() {
+        List<Keyboard.Key> keyList = mKeyboardNumber.getKeys();
+        // 查找出0-9的数字键
+        List<Keyboard.Key> newkeyList = new ArrayList<Keyboard.Key>();
+        for (int i = 0; i < keyList.size(); i++) {
+            if (keyList.get(i).label != null
+                    && isNumber(keyList.get(i).label.toString())) {
+                newkeyList.add(keyList.get(i));
+            }
+        }
+        // 数组长度
+        int count = newkeyList.size();
+        // 结果集
+        List<KeyModel> resultList = new ArrayList<KeyModel>();
+        // 用一个LinkedList作为中介
+        LinkedList<KeyModel> temp = new LinkedList<KeyModel>();
+        // 初始化temp
+        for (int i = 0; i < count; i++) {
+            temp.add(new KeyModel(48 + i, i + ""));
+        }
+        // 取数
+        Random rand = new Random();
+        for (int i = 0; i < count; i++) {
+            int num = rand.nextInt(count - i);
+            resultList.add(new KeyModel(temp.get(num).getCode(),
+                    temp.get(num).getLable()));
+            temp.remove(num);
+        }
+        for (int i = 0; i < newkeyList.size(); i++) {
+            newkeyList.get(i).label = resultList.get(i).getLable();
+            newkeyList.get(i).codes[0] = resultList.get(i)
+                    .getCode();
+        }
+
+        mKeyboardView.setKeyboard(mKeyboardNumber);
+    }
+
+    public void showKeyboard() {
+        int visibility = mKeyboardView.getVisibility();
+        if (visibility == View.GONE || visibility == View.INVISIBLE) {
+            mKeyboardView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void hideKeyboard() {
+        int visibility = mKeyboardView.getVisibility();
+        if (visibility == View.VISIBLE) {
+            mKeyboardView.setVisibility(View.GONE);
+        }
     }
 }

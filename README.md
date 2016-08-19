@@ -17,6 +17,14 @@
 <img src="screen/screen_gif.gif" width="320px"/>
 </p>
 
+###增加随机数字键盘
+ 增加速记数字键盘，用于输入安全级别高的密码输入
+ 
+ <p align="center">
+<img src="screen/screen_git_random.gif" width="320px"/>
+</p>
+ 
+
 使用的android系统的api，keyboardview和keyboard，
 
 本来想把确定按钮也按闲鱼一样改成蓝色的，无奈stackoverflow逛了一圈也没有找到有效的方法。
