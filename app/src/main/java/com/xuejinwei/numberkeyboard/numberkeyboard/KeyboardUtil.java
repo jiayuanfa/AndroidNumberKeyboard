@@ -25,9 +25,9 @@ public class KeyboardUtil {
     private Activity mActivity;
     private boolean  mIfRandom;
 
-    private KeyboardView mKeyboardView;
-    private Keyboard     mKeyboardNumber;//数字键盘
-    private EditText     mEditText;
+    private MyKeyBoardView mKeyboardView;
+    private Keyboard       mKeyboardNumber;//数字键盘
+    private EditText       mEditText;
 
     public KeyboardUtil(Activity activity) {
         this(activity, false);
@@ -37,7 +37,7 @@ public class KeyboardUtil {
         this.mActivity = activity;
         this.mIfRandom = ifRandom;
         mKeyboardNumber = new Keyboard(mActivity, R.xml.keyboardnumber);
-        mKeyboardView = (KeyboardView) mActivity.findViewById(R.id.keyboard_view);
+        mKeyboardView = (MyKeyBoardView) mActivity.findViewById(R.id.keyboard_view);
     }
 
     /**
@@ -56,7 +56,7 @@ public class KeyboardUtil {
             mKeyboardNumber = new Keyboard(mActivity, R.xml.keyboardnumber);
         }
         if (mKeyboardView == null) {
-            mKeyboardView = (KeyboardView) mActivity.findViewById(R.id.keyboard_view);
+            mKeyboardView = (MyKeyBoardView) mActivity.findViewById(R.id.keyboard_view);
         }
         if (mIfRandom) {
             randomKeyboardNumber();

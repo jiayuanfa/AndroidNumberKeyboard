@@ -1,5 +1,9 @@
 #自定义Android数字键盘Demo
 
+###update: 
+1. 增加数字键盘位置随机
+2. 自定义MyKeyBoardView,实现单独设置确定按钮背景
+
 ##仿造android端闲鱼发布商品时候选择价格 弹出的数字键盘。
 
 
@@ -27,5 +31,4 @@
 
 使用的android系统的api，keyboardview和keyboard，
 
-本来想把确定按钮也按闲鱼一样改成蓝色的，无奈stackoverflow逛了一圈也没有找到有效的方法。
 

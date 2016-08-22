@@ -1,6 +1,5 @@
 package com.xuejinwei.numberkeyboard.numberkeyboard;
 
-import android.inputmethodservice.KeyboardView;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
@@ -19,13 +18,13 @@ import butterknife.ButterKnife;
  */
 public class XianYuActivity extends AppCompatActivity {
 
-    @Bind(R.id.tv_price)       TextView     tv_price;
-    @Bind(R.id.ll_price)         LinearLayout ll_price;
-    @Bind(R.id.et_price)         EditText     et_price;
-    @Bind(R.id.et_orginal_price) EditText     et_orginal_price;
-    @Bind(R.id.et_freight)       EditText     et_freight;
-    @Bind(R.id.keyboard_view)    KeyboardView keyboard_view;
-    @Bind(R.id.ll_price_select)  LinearLayout ll_price_select;
+    @Bind(R.id.tv_price)         TextView       tv_price;
+    @Bind(R.id.ll_price)         LinearLayout   ll_price;
+    @Bind(R.id.et_price)         EditText       et_price;
+    @Bind(R.id.et_orginal_price) EditText       et_orginal_price;
+    @Bind(R.id.et_freight)       EditText       et_freight;
+    @Bind(R.id.keyboard_view)    MyKeyBoardView keyboard_view;
+    @Bind(R.id.ll_price_select)  LinearLayout   ll_price_select;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
