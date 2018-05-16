@@ -10,8 +10,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by xuejinwei on 16/8/19.
- * Email:xuejinwei@outlook.com
+ * Created by JiaYuanfa on 18/5/16.
  */
 public class RandomActivity extends AppCompatActivity {
 
@@ -23,9 +22,9 @@ public class RandomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_random);
         ButterKnife.bind(this);
-        
 
-        final KeyboardUtil keyboardUtil = new KeyboardUtil(RandomActivity.this,true);
+
+        final KeyboardUtil keyboardUtil = new KeyboardUtil(RandomActivity.this,false);
 
         mEtRondom.setOnClickListener(new View.OnClickListener() {
             @Override
