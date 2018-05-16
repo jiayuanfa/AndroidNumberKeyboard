@@ -13,8 +13,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by xuejinwei on 16/8/19.
- * Email:xuejinwei@outlook.com
+ * Created by jyf on 2018/5/16.
  */
 public class XianYuActivity extends AppCompatActivity {
 

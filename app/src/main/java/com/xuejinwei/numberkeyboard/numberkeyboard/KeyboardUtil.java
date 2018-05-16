@@ -19,7 +19,7 @@ import java.util.Random;
 
 /**
  * 自定义键盘
- * Created by xuejinwei on 16/3/5.
+ * Created by jyf on 2018/5/16.
  */
 public class KeyboardUtil {
     private Activity mActivity;
@@ -36,7 +36,7 @@ public class KeyboardUtil {
     public KeyboardUtil(Activity activity, boolean ifRandom) {
         this.mActivity = activity;
         this.mIfRandom = ifRandom;
-        mKeyboardNumber = new Keyboard(mActivity, R.xml.keyboardnumber);
+        mKeyboardNumber = new Keyboard(mActivity, R.xml.keyboard_number);
         mKeyboardView = (MyKeyBoardView) mActivity.findViewById(R.id.keyboard_view);
     }
 
@@ -53,7 +53,7 @@ public class KeyboardUtil {
 
     public void showSoftKeyboard() {
         if (mKeyboardNumber == null) {
-            mKeyboardNumber = new Keyboard(mActivity, R.xml.keyboardnumber);
+            mKeyboardNumber = new Keyboard(mActivity, R.xml.keyboard_number);
         }
         if (mKeyboardView == null) {
             mKeyboardView = (MyKeyBoardView) mActivity.findViewById(R.id.keyboard_view);
